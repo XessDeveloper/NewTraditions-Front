@@ -1,0 +1,35 @@
+<footer class="footer mt-auto py-3 ">
+  <div class="container d-flex">
+    <div class="copyright d-flex">
+      <span>© 2024 New Traditions</span>
+    </div>
+
+    <div class="contact-info d-flex">
+      <div class="EmailAndPhone">
+        <div class="email">
+          <h5>Email</h5>
+          <p>{{ email }}</p>
+        </div>
+
+        <div class="phone">
+          <h5>Nuestro teléfono</h5>
+          <p>{{ phone }}</p>
+       </div>
+      </div>
+        
+
+        <div class="localization d-flex">
+          <h5>Nos puedes encontrar en</h5>
+          <p>{{ localization }}</p>
+        </div>
+
+
+
+        <div class="timetable d-flex">
+          <h5>Horario del Restaurante</h5>
+          <p *ngFor="let item of timetable">{{ item }} &nbsp;</p>
+        </div>  
+    </div>
+
+  </div>
+</footer>
