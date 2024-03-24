@@ -32,8 +32,7 @@ export class LoginComponent {
       response => {
       if (response.statusCode === IApiCodes.Ok) {
         Swal.fire({ text: `${response.message}`, icon: 'success' })
-        this.authService.SetCookie('IdUsuario', response.Object!.id.toString())
-        console.log(this.authService.GetCookie())
+        this.authService.SetCookie('IdUsuario', response.objects![0].toString());
       }
     },
     errorResponse => {
