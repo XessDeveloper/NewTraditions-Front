@@ -3,5 +3,5 @@ import { IApiCodes } from "./i-api-codes"
 export interface IStatusCodeResponse<T> {
     statusCode: IApiCodes
     message?: string
-    Object?: T
+    objects?: T[]
 }
