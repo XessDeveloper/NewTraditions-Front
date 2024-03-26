@@ -4,52 +4,79 @@
       <div class="card">
         <div class="card-header">Registro</div>
         <div class="card-body">
-          <form (ngSubmit)="register()" #registerForm="ngForm">
-            <div class="form-group mb-3">
-              <label for="username">Nombre</label>
-              <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese su nombre" required [(ngModel)]="authRequest.usuario.name">
-            </div>
-            <div class="form-group mb-3">
-              <label for="username">Primer apellido</label>
-              <input type="text" class="form-control" name="firstSurname" id="firstSurname" placeholder="Ingrese su primer apellido" required [(ngModel)]="surname1">
-            </div>
-            <div class="form-group mb-3">
-              <label for="username">Segundo Apellido</label>
-              <input type="text" class="form-control" name="secondSurname" id="secondSurname" placeholder="Ingrese su segundo apellido" required [(ngModel)]="surname2">
-            </div>
+          <!-- TODO => Terminar validaciones y LOGIN-->
+          <form (ngSubmit)="register()" #registerForm="ngForm" class="needs-validation" novalidate>
+            <!-- DATOS PERSONALES -->
+              <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Introduzca su nombre" (blur)="changeInputChangedStatus('name')"
+                [(ngModel)]="authRequest.usuario.name" [ngClass]="{'is-invalid': !authRequest.usuario.name && isInputTouched('name')}" maxlength="50" required>
+                <div *ngIf="!authRequest.usuario.name && isInputTouched('name')" class="invalid-feedback">{{ emptyInputError }}</div>
+              </div>
+  
+              <div class="form-group mb-3">
+                <label for="firstSurname">Primer apellido</label>
+                <input type="text" class="form-control" name="firstSurname" id="firstSurname" placeholder="Ingrese su primer apellido" (blur)="changeInputChangedStatus('firstSurname')"
+                 [(ngModel)]="surname1" [ngClass]="{'is-invalid': !this.surname1 && isInputTouched('firstSurname')}" maxlength="50" required>
+                 <div *ngIf="!surname1 && isInputTouched('firstSurname')" class="invalid-feedback">{{emptyInputError}}</div> 
+              </div>
+              
+              <div class="form-group mb-3">
+                <label for="secondSurname">Segundo apellido</label>
+                <input type="text" class="form-control" name="secondSurname" id="secondSurname" placeholder="Ingrese su segundo apellido" (blur)="changeInputChangedStatus('secondSurname')"
+                 [(ngModel)]="surname2" [ngClass]="{'is-invalid': !this.surname2 && isInputTouched('secondSurname')}" maxlength="50" required>
+                 <div *ngIf="!surname2 && isInputTouched('secondSurname')" class="invalid-feedback">{{emptyInputError}}</div> 
+              </div>
+  
+              <div class="form-group mb-3">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese su correo electrónico" (blur)="changeInputChangedStatus('correo')"
+                 [(ngModel)]="authRequest.usuario.email" [ngClass]="{'is-invalid': !this.authRequest.usuario.email && isInputTouched('correo')}" maxlength="50" required>
+                <div *ngIf="!authRequest.usuario.email && isInputTouched('correo')" class="invalid-feedback">{{emptyInputError}}</div>
+              </div>
+  
+              <div class="form-group mb-3">
+                <label for="username">Número de Teléfono</label>
+                <input type="text" class="form-control" name="phone" id="phone" placeholder="Ingrese su número de teléfono" (blur)="changeInputChangedStatus('phone')"
+                 [(ngModel)]="authRequest.usuario.phone" [ngClass]="{'is-invalid': !this.authRequest.usuario.phone && isInputTouched('phone')}" maxlength="12" required>
+                <div *ngIf="!authRequest.usuario.phone && isInputTouched('phone')" class="invalid-feedback">{{emptyInputError}}</div>
+              </div>
+  
+              <div class="form-group mb-3">
+                <label for="username">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" name="birthDate" id="birthDate" (blur)="changeInputChangedStatus('birthDate')" 
+                [(ngModel)]="authRequest.usuario.birthDate" [max]="this.maxDate" required>
+              </div>            
 
-            <div class="form-group mb-3">
-              <label for="correo">Correo electrónico</label>
-              <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese su correo electrónico" required [(ngModel)]="authRequest.usuario.email">
-            </div>
-
-            <div class="form-group mb-3">
-              <label for="username">Número de Teléfono</label>
-              <input type="text" class="form-control" name="phone" id="phone" placeholder="Ingrese su número de teléfono" required [(ngModel)]="authRequest.usuario.phone">
-            </div>
-
-            <div class="form-group mb-3">
-              <label for="username">Fecha de Nacimiento</label>
-              <input type="date" class="form-control" name="birthDate" id="birthDate" required [(ngModel)]="authRequest.usuario.birthDate">
-            </div>
-
+            <!-- DATOS INICIO SESION -->
             <div class="form-group mb-3">
               <label for="username">Nombre de Usuario</label>
-              <input type="text" class="form-control" name="username" id="username" placeholder="Ingrese su nombre de usuario" required [(ngModel)]="authRequest.authUser.username">
+              <input type="text" class="form-control" name="username" id="username" placeholder="Ingrese su nombre de usuario" (blur)="changeInputChangedStatus('username')"
+               [(ngModel)]="authRequest.authUser.username" [ngClass]="{'is-invalid': (!this.authRequest.authUser.username || !usernameValidation()) && isInputTouched('username')}" required>
+               <div *ngIf="(!authRequest.authUser.username || !usernameValidation()) && isInputTouched('username')" class="invalid-feedback">
+                {{ !this.authRequest.authUser.username ? emptyInputError : 'El nombre de usuario no puede contener espacios en blanco o caracteres especiales' }}
+              </div>
             </div>
 
             <div class="form-group mb-3">
               <label for="password">Contraseña</label>
-              <input type="password" class="form-control" name="password" id="password" placeholder="Ingrese su contraseña" required [(ngModel)]="authRequest.authUser.password">
+              <input type="password" class="form-control" name="password" id="password" placeholder="Ingrese su contraseña" (blur)="changeInputChangedStatus('password')"
+               [(ngModel)]="authRequest.authUser.password" [ngClass]="{'is-invalid': !this.authRequest.authUser.password && isInputTouched('password') || !passwordMatches() && isInputTouched('password')}" required>
+              <div *ngIf="!authRequest.authUser.password && isInputTouched('password')" class="invalid-feedback">{{emptyInputError}}</div> 
+              <div *ngIf="!passwordMatches()" class="invalid-feedback">Las contraseñas no coinciden</div>
             </div>
 
             <div class="form-group mb-3">
               <label for="repeat_password">Confirmar Contraseña</label>
-              <input type="password" class="form-control" name="repeat_password" id="repeat_password" placeholder="Confirme su contraseña" required [(ngModel)]="authRequest.authUser.confirmPassword">
+              <input type="password" class="form-control" name="repeat_password" id="repeat_password" placeholder="Confirme su contraseña" (blur)="changeInputChangedStatus('repeat_password')"
+               [(ngModel)]="authRequest.authUser.confirmPassword" [ngClass]="{'is-invalid': !this.authRequest.authUser.confirmPassword && isInputTouched('repeat_password') || !passwordMatches() && isInputTouched('repeat_password')}" required>
+              <div *ngIf="!authRequest.authUser.confirmPassword && isInputTouched('repeat_password')" class="invalid-feedback">{{emptyInputError}}</div>
+              <div *ngIf="!passwordMatches()" class="invalid-feedback">Las contraseñas no coinciden</div>
             </div>
-
+            
+            <!-- BOTONES -->
             <div class="form-group d-flex justify-content-center gap-5 mt-4">
-              <button type="submit" class="btn btn-primary btn-block mr-2" [disabled]="!registerForm.form.valid">Registrarse</button>
+              <button type="submit" class="btn btn-primary btn-block mr-2" [disabled]="!registerForm.form.valid || !passwordMatches() || !usernameValidation()">Registrarse</button>
               <button type="button" class="btn btn-primary btn-block ml-2" (click)="cancel()">Cancelar</button>
             </div>
           </form>
