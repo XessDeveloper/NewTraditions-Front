@@ -1,9 +1,9 @@
-<div class="container-fluid">
-  <div class="row justify-content-center align-items-center" style="height: 100vh;">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">Registro</div>
-        <div class="card-body">
+<div>
+  <div>
+    <div>
+      <div>
+        <div>Registro</div>
+        <div>
           <!-- TODO => Terminar validaciones y LOGIN-->
           <form (ngSubmit)="register()" #registerForm="ngForm" class="needs-validation" novalidate>
             <!-- DATOS PERSONALES -->
@@ -76,8 +76,8 @@
             
             <!-- BOTONES -->
             <div class="form-group d-flex justify-content-center gap-5 mt-4">
-              <button type="submit" class="btn btn-primary btn-block mr-2" [disabled]="!registerForm.form.valid || !passwordMatches() || !usernameValidation()">Registrarse</button>
-              <button type="button" class="btn btn-primary btn-block ml-2" (click)="cancel()">Cancelar</button>
+              <button type="submit" [disabled]="!registerForm.form.valid || !passwordMatches() || !usernameValidation()">Registrarse</button>
+              <button type="button" (click)="cancel()">Cancelar</button>
             </div>
           </form>
         </div>
