@@ -6,11 +6,7 @@
     padding: 20px 0;
   }
 
-  .contact-info {
-    color: #ccc; /* Color del texto de la información de contacto */
-    font-size: 14px; /* Tamaño de fuente para los detalles de contacto */
-  }
-  
-  .contact-info p {
-    margin-bottom: 5px; /* Espacio entre cada línea de información de contacto */
+
+  .contact-info, .copyright {
+    color: #ccc; // Color del texto de la información de contacto 
   }
