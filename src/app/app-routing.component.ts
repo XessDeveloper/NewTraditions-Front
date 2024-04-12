@@ -5,6 +5,8 @@ import { LoginComponent } from './Views/login/login.component';
 import { HomeComponent } from './Views/home/home.component';
 import { IngredientsComponent } from './Views/ingredients/ingredients.component';
 import { PlatesComponent } from './Views/plates/plates.component';
+import { UpdateIngredientComponent } from './Views/ingredients/update-ingredient/update-ingredient.component';
+import { CreateIngredientComponent } from './Views/ingredients/create-ingredient/create-ingredient.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -12,6 +14,8 @@ const routes: Routes = [
     { path: 'registro', component: RegisterComponent, pathMatch: 'full' },
     { path: 'login', component: LoginComponent, pathMatch: 'full' },
     { path: 'ingredientes', component: IngredientsComponent, pathMatch: 'full' },
+    { path: 'ingredientes/crear', component: CreateIngredientComponent, pathMatch: 'full' },
+    { path: 'ingredientes/modificar', component: UpdateIngredientComponent, pathMatch: 'full' },
     { path: 'platos', component: PlatesComponent, pathMatch: 'full' }
 ];
 

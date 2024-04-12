@@ -19,6 +19,8 @@ import { SidenavComponent } from './Components/sidenav/sidenav.component';
 import { EditButtonRendererComponent } from './Formatters-Renderers/Renderers/edit-button-renderer/edit-button-renderer.component';
 import { DeleteButtonRendererComponent } from './Formatters-Renderers/Renderers/delete-button-renderer/delete-button-renderer.component';
 import { HelpMethods } from './HelpMethods/help-methods';
+import { CreateIngredientComponent } from './Views/ingredients/create-ingredient/create-ingredient.component';
+import { UpdateIngredientComponent } from './Views/ingredients/update-ingredient/update-ingredient.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { HelpMethods } from './HelpMethods/help-methods';
     FooterComponent,
     RegisterComponent,
     LoginComponent,
-    IngredientsComponent
+    IngredientsComponent,
+    CreateIngredientComponent,
+    UpdateIngredientComponent
   ],
   imports: [
     CommonModule,
