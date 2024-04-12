@@ -1,0 +1,36 @@
+//TODO => Validations 
+
+<section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <form (ngSubmit)="updateIngredient()" #updateIngredientForm="ngForm" class="needs-validation is-vcentered" novalidate>
+            <div class="field">
+              <label class="label" for="id">Id</label>
+              <input class="input" type="text" id="id" name="id" [value]="ingredientToModify.id" disabled>
+            </div>
+  
+            <div class="field">
+              <label class="label" for="name">Nombre</label>
+              <input class="input" type="text" id="name" name="name" [(ngModel)]="ingredientToModify.name">
+            </div>
+  
+            <div class="field">
+              <label class="label" for="price">Precio</label>
+              <input class="input" type="text" id="price" name="price" [(ngModel)]="ingredientToModify.price">
+            </div>
+  
+            <div class="field is-grouped is-grouped-centered">
+              <div class="control">
+                <button class="button is-primary" type="submit">Modificar</button>
+              </div>
+              <div class="control">
+                <button class="button is-danger" (click)="cancel()">Cancelar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  
