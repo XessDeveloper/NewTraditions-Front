@@ -20,11 +20,13 @@ export class AuthService {
      return this.http.post<IApiResponse<IAuthUser>>('/Auth/Login', request);
   }
 
-  GetFromLocal = () => localStorage.getItem('token');
-  SetToLocal = (tokenJWT: string) => localStorage.setItem('token', tokenJWT);
-  CheckIfUserLogged = () => !!this.GetFromLocal()
+  Logout() {}
+
+  GetToken = () => sessionStorage.getItem('token');
+  setToken = (tokenJWT: string) => sessionStorage.setItem('token', tokenJWT);
+  CheckIfUserLogged = () => !!this.GetToken()
   GetClaimsFromToken = () => {
-    const token = this.GetFromLocal();
+    const token = this.GetToken();
 
     if (token) return this.jwtHelper.decodeToken(token)
     

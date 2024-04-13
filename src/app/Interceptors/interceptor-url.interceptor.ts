@@ -11,7 +11,7 @@ export class interceptorUrlInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.authService.GetFromLocal();
+    const token = this.authService.GetToken();
 
       const modifiedRequest = request.clone({
         url: `${this.apiUrl}${request.url}`,

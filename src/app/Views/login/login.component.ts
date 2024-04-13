@@ -32,9 +32,7 @@ export class LoginComponent {
       response => {
       if (response.statusCode === IApiCodes.Ok) {
         Swal.fire({ text: `${response.message}`, icon: 'success' })
-        this.authService.SetToLocal(response.token!)
-
-        //console.log(this.authService.GetClaimsFromToken())
+        this.authService.setToken(response.token!)
       }
     },
     errorResponse => {
