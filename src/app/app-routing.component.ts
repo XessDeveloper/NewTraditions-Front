@@ -15,7 +15,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent, pathMatch: 'full' },
     { path: 'ingredientes', component: IngredientsComponent, pathMatch: 'full' },
     { path: 'ingredientes/crear', component: CreateIngredientComponent, pathMatch: 'full' },
-    { path: 'ingredientes/modificar', component: UpdateIngredientComponent, pathMatch: 'full' },
+    { path: 'ingredientes/modificar/:id', component: UpdateIngredientComponent, pathMatch: 'full' },
     { path: 'platos', component: PlatesComponent, pathMatch: 'full' }
 ];
 

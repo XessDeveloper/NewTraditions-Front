@@ -18,7 +18,8 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
   editClicked = (itemClicked: any) => {
     this.sharedService.selectedItemParam = itemClicked;
-    this.router.navigate([`${this.currentUrl}/modificar`])
+    const itemId = itemClicked.id
+    this.router.navigate([`${this.currentUrl}/modificar/${itemId}`])
   }
 
   agInit(params: ICellRendererParams<any, any, any>) { 
