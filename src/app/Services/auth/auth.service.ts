@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IAuthUser } from '../../Models/Auth/i-auth-user';
 import { IApiResponse } from '../../Models/shared/i-api-response';
-import { CookieService } from 'ngx-cookie-service';
 import { IAuthRequest } from '../../Models/Auth/requests/i-auth-request';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -20,8 +19,10 @@ export class AuthService {
      return this.http.post<IApiResponse<IAuthUser>>('/Auth/Login', request);
   }
 
-  Logout() {}
-
+  Logout = () => {
+    sessionStorage.removeItem('token')
+    location.reload();
+  }
   GetToken = () => sessionStorage.getItem('token');
   setToken = (tokenJWT: string) => sessionStorage.setItem('token', tokenJWT);
   CheckIfUserLogged = () => !!this.GetToken()
