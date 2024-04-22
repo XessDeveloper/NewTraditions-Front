@@ -8,16 +8,15 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-  email: string = 'prueba@empresa.com'
-  localization: string = 'Calle Prueba, 52 - San Vicente del Raspeig'
+  email: string = 'newtraditions02@gmail.com'
   phone: string = '+34 123456789'
   timetable: string[] = [
-    'Lunes: 08:00 - 17:30',
-    'Martes: 08:00 - 17:45',
-    'Miércoles: 08:30 - 17:00',
-    'Jueves: 12:00 - 16:00',
-    'Viernes: 09:30 - 12:00',
-    'Sábado: 10:45 - 13:30',
-    'Domingo: Cerrado',
+    'Lunes: 08:00 - 16:30 / 19:00 - 01:00',
+    'Martes: 08:00 - 16:30 / 19:00 - 01:00',
+    'Miércoles: Cerrado',
+    'Jueves: Cerrado',
+    'Viernes: 08:00 - 16:30 / 19:00 - 01:00',
+    'Sábado: 08:00 - 16:30 / 19:00 - 01:00',
+    'Domingo: 08:00 - 16:30 / 19:00 - 01:00'
   ]
 }

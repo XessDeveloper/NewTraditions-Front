@@ -10,3 +10,8 @@
   .contact-info, .copyright {
     color: #ccc; // Color del texto de la información de contacto 
   }
+
+  .timetable-item.last-item {
+    flex-basis: 100%; /* Hace que el último elemento ocupe todo el ancho */
+    margin-top: 10px;
+  }

@@ -1,5 +1,5 @@
-<footer class="footer">
-  <div class="container">
+<footer class="footer has-background-dark mt-5">
+  <div>
     <div class="has-text-centered">
       <figure class="mb-3 is-inline-block"> 
         <img src="../../../assets/testImageFooter-removebg-preview.jpg" alt="Test Image" class="image is-128x128"> 
@@ -7,21 +7,20 @@
 
       <div class="contact-info mt-3">
         <div class="mb-3">
-          <p>{{email}}</p>
+          <p>Contacto vía mail: {{email}}</p>
         </div>
         <div class="mt-3">
-          <p>Teléfono {{phone}}</p>
+          <p>Contacto via teléfonico: {{phone}}</p>
         </div>
       </div>
 
-      <hr>
+      <hr class="mt-5 mb-5" style="width: 70%; margin: auto">
 
-      <div class="timetable mt-5">
-        <div class="is-flex">
-          <span *ngFor="let item of timetable; let last = last;">
-            <p>{{ item }} &nbsp; <span *ngIf="!last">/ &nbsp;</span></p>
-          </span>
-        </div>
+      <h4>Horario del Restaurante</h4>
+      <div class="timetable mt-5 is-flex is-flex-wrap-wrap is-justify-content-center">
+        <ng-container *ngFor="let item of timetable; let last = last" class="timetable-item" [class.last-item]="last">
+          <p class="mr-1 ml-2">{{ item }}&nbsp;</p>
+        </ng-container>
       </div>
         
 
