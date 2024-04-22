@@ -12,24 +12,25 @@ export class interceptorForbiddenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 403 && !this.authService.CheckIfUserLogged()) {
-          Swal.fire({
-            icon: 'error',
-            title: "No tienes los permisos suficientes",
-            confirmButtonText: "Entiendo"
-          }).then( (result) => {
-            if (result.isConfirmed)
-              this.router.navigate(['/login']);
-          })
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: "No tienes los permisos suficientes",
-            confirmButtonText: "Entiendo"
-          })
+        if (error.status === 403) {
+          if (!this.authService.CheckIfUserLogged()) {
+            Swal.fire(
+              { 
+                icon: 'error',
+                title: 'No tienes los permisos suficientes',
+                confirmButtonText: 'Entiendo'
+              }).then(result => { this.router.navigate(['/login'])
+            })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'No tienes los permisos suficientes',
+              confirmButtonText: 'Entiendo'
+            }).then(result => window.history.back())
+          }
         }
         return throwError(error)
-      }));
+      })
+    )
   }
-
 }
