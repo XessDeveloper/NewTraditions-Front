@@ -3,3 +3,13 @@
 @import '../node_modules/ag-grid-community/styles/ag-theme-alpine.min.css';
 
 @import '../node_modules/bulma/css/bulma.min.css';
+
+body {
+    min-height: 100vh;
+}
+
+header.hero {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
