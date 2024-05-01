@@ -1,0 +1,56 @@
+<div class="modal" [ngClass]="{ 'is-active': showModal }" style="z-index: 1000;">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Terminos y Condiciones</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body" (scroll)="onScroll($event)">
+        <div class="content" #content>
+          <p>
+            El presente contrato describe los términos y condiciones aplicables al uso del contenido, productos y/o servicios del sitio web New Traditions.<br>
+            Para hacer uso del contenido, productos y/o servicios del sitio web el usuario deberá sujetarse a los presentes términos y condiciones.
+          </p>   
+
+          <h2 class="subtitle is-4 has-text-centered">I. USUARIO</h2>
+          <p>
+            La actividad del usuario en el sitio web estarán sujetos a los presentes términos y condiciones. 
+            El usuario se compromete a utilizar el contenido, productos y/o servicios de forma lícita, sin faltar a la moral o al orden público,
+            absteniéndose de realizar cualquier acto que afecte los derechos de terceros o el funcionamiento del sitio web.<br>
+            El usuario se compromete a proporcionar información verídica en los formularios del sitio web.
+            El acceso al sitio web no supone una relación entre el usuario y el titular del sitio web.
+          </p>
+          <h2 class="subtitle is-4 has-text-centered">II.ACCESO Y NAVEGACIÓN EN EL SITIO</h2>
+          <p>
+            El titular no garantiza la continuidad y disponibilidad del contenido, productos y/o servicios en el sitito web,
+            realizará acciones que fomenten el buen funcionamiento de dicho sitio web sin responsabilidad alguna.<br>
+            El titular no se responsabiliza de que el software esté libre de errores que puedan causar un daño al software y/o hardware del equipo del cual el usuario accede al sitio web. 
+            De igual forma, no se responsabiliza por los daños causados por el acceso y/o utilización del sitio web.
+          </p>
+          <h2 class="subtitle is-4 has-text-centered">III.POLÍTICA DE PRIVACIDAD Y PROTECCIÓN DE DATOS</h2>
+          <p>
+            Conforme a lo establecido en La Ley Orgánica de Protección de Datos Personales y garantía de los derechos digitales,
+            el titular de compromete a tomar las medidas necesarias que garanticen la seguridad del usuario, evitando que se haga uso indebido de los datos personales que el usuario proporcione en el sitio web.<br>
+            El titular corroborará que los datos personales contenidos en las bases de datos sean correctos, verídicos y actuales, así como que se utilicen únicamente con el fin con el que fueron recabados.
+            New Traditions se reserva el derecho de realizar cualquier tipo de modificación en cualquier momento y sin previo aviso, de acuerdo con sus necesidades o cambios en la legislación aplicable, el usuario acepta dichas modificaciones.
+          </p>
+          <h2 class="subtitle is-4 has-text-centered">IV. POLÍTICA DE PROPIEDAD INTELECTUAL E INDUSTRIAL</h2>
+          <p>
+            El titular manifiesta tener los derechos de propiedad intelectual e industrial del sitio web incluyendo imágenes, archivos de audio o video, logotipos, marcas, colores, estructuras, tipografías, diseños y 
+            demás elementos que lo distinguen, protegidos por la legislación española e internacional en materia de propiedad intelectual e industrial.
+          </p>
+          <h2 class="subtitle is-4 has-text-centered">V. LEGISLACIÓN Y JURISDICCIÓN APLICABLE</h2>
+          <p>
+            La relación entre el usuario y el titular se regirá por las legislaciones aplicables en España.
+            New Traditions no se responsabiliza por la indebida utilización del contenido, productos y/o servicios del sitio web y del incumplimiento de los presentes términos y condiciones.
+          </p>
+        </div>
+      </section>
+      <footer class="modal-card-foot" >
+        <div class="buttons" *ngIf="showButtons">
+          <button type="button is-black" class="button is-success" (click)="termsAccepted($event)">Aceptar</button>
+          <button type="button is-black" class="button is-danger" (click)="cancel($event)">Cancel</button>
+        </div>
+      </footer>
+    </div>
+  </div>
