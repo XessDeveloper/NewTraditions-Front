@@ -1,11 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Output, ViewChild, inject } from '@angular/core';
 import { AuthService } from '../../Services/auth/auth.service';
 import { IAuthUser } from '../../Models/Auth/i-auth-user';
-import { IApiCodes } from '../../Models/shared/i-api-codes';
-import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { HelpMethods } from '../../HelpMethods/help-methods';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -13,11 +13,12 @@ import { HelpMethods } from '../../HelpMethods/help-methods';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  constructor(private authService: AuthService) { }
+  private readonly authService = inject(AuthService);
+  private readonly helpMethods = inject(HelpMethods);
+  private readonly router = inject(Router);
+
   @ViewChild('loginForm') loginForm!: NgForm;
   subscriptions: Subscription = new Subscription()
-  helpMethods: HelpMethods = new HelpMethods()
-
   user: IAuthUser = {
     id: '',
     username: '',
@@ -30,18 +31,26 @@ export class LoginComponent {
   login() {
     this.subscriptions.add(this.authService.Login(this.user).subscribe(
       response => {
-      if (response.statusCode === IApiCodes.Ok) {
-        Swal.fire({ text: `${response.message}`, icon: 'success' })
-        this.authService.setToken(response.token!)
+        this.helpMethods.showSwalResponses({
+          isSuccessfull: true,
+          message: response.message!,
+          statusCode: response.statusCode,
+          okAction: () => {
+            this.authService.setToken(response.token!)
+            // Redirect to Home
+            this.router.navigate(['/home'])
+          }
+        })
+      },
+errorResponse => {
+        this.helpMethods.showSwalResponses({
+          isSuccessfull: false,
+          message: errorResponse.error.message,
+          statusCode: errorResponse.statusCode,
+          okAction: () => this.helpMethods.resetFields(this.loginForm)
+        })
       }
-    },
-    errorResponse => {
-      switch(errorResponse.status) {
-        case IApiCodes.Unauthorized: Swal.fire({ text: `${errorResponse.error.message}`, icon: 'error'}); this.helpMethods.resetFields(this.loginForm); break;
-        case IApiCodes.NotFound: Swal.fire({ text: `${errorResponse.error.message}`, icon: 'error'}); this.helpMethods.resetFields(this.loginForm); break;
-        case IApiCodes.InternalServerError: console.debug(errorResponse.error.message); this.helpMethods.resetFields(this.loginForm); break;
-      }
-    }))
+    ))
   }
 
   OnDestroy = () => this.subscriptions.unsubscribe();
